@@ -1,0 +1,33 @@
+<h1>Сбросить пароль</h1>
+<table>
+    <tr>
+        <td><span>Email: </span></td>
+        <td><input type="text" [formControl]="email"></td>
+    </tr>
+</table>
+
+<p><button [disabled]="!email.valid" (click)="submit()">Отправить</button></p>
+
+<ng-container *ngIf="isSubmitted">
+    <p class="info">На ваш Email было отправлено письмо с кодом сброса.</p>
+    <a routerLink="/login">Перейти на страницу входа</a>
+    <!-- <form [formGroup]="resetForm" (submit)="reset()">
+        <table>
+            <tr>
+                <td><span>Код сброса: </span></td>
+                <td><input type="text" formControlName="resetCode"></td>
+            </tr>
+            <ng-container formGroupName="newPassword">
+                <tr>
+                    <td><span>Новый пароль: </span></td>
+                    <td><input type="password" formControlName="password"></td>
+                </tr>
+                <tr>
+                    <td><span>Подтвердите новый пароль: </span></td>
+                    <td><input type="password" formControlName="confirmPassword"></td>
+                </tr>
+            </ng-container>
+        </table>
+        <p><button type="submit" [disabled]="!resetForm.valid">Сбросить</button></p>
+    </form> -->
+</ng-container>

@@ -1,0 +1,21 @@
+<h1>Вход</h1>
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+    <p class="error" *ngIf="error.length > 0">{{ error }}</p>
+    <table>
+        <tr>
+            <td>
+                <span>Email: </span>
+            </td>
+            <td><input type="text" formControlName="email" required></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Пароль: </span>
+            </td>
+            <td><input type="password" formControlName="password" required></td>
+        </tr>
+    </table>
+    <a routerLink="/account/reset">Забыли пароль?</a>
+    <p><button type="submit" [disabled]="!loginForm.valid">Войти</button></p>
+    <a routerLink="/register">Регистрация</a>
+</form>

@@ -1,0 +1,21 @@
+div.postCardContainer {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+// For mobile phones
+/* @media (max-width: 750px) {
+    div.postCardContainer {
+        justify-content: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+} */

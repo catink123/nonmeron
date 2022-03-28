@@ -1,0 +1,3 @@
+<p class="info" *ngIf="showMessage">Войдите в аккаунт, чтобы ставить лайк. <a routerLink="/login">Перейти на страницу входа</a></p>
+<button disabled *ngIf="isLoading">👍 ...</button>
+<button *ngIf="!isLoading" [ngClass]="likedByCurrentUser ? 'liked' : ''" (click)="like()" [disabled]="showMessage">👍 {{ likedBy.length }}</button>

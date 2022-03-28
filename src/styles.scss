@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    // --dark-color: #47271b;
+    --dark-color: hsl(16, 25%, 19%);
+    // --darker-color: #291a15;
+    --darker-color: hsl(15, 25%, 12%);
+    --dark-color-transparent: rgba(71, 39, 27, 0.85);
+    --dark-shadow-color: rgba(71, 39, 27, 0.5);
+    --light-color: #f9eed2;
+    --lighter-color: rgb(255, 250, 239);
+    --light-color-transparent: rgba(249, 238, 210, 0.85);
+    --border-color: #64483e;
+    --active-color: #291a15;
+    margin: 10px 10%;
+    border: 2px solid var(--border-color);
+    background: url(assets/backdrop.jpg);
+    background-size: contain;
+    background-attachment: fixed;
+    color: var(--darker-color);
+    border-radius: 15px;
+}
+
+a, button {
+    color: var(--darker-color);
+    user-select: none;
+    appearance: none;
+    cursor: pointer;
+    transition-duration: .1s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:hover, button:hover {
+    background: var(--lighter-color) !important;
+    color: var(--darker-color) !important;
+}
+
+a:active, button:active {
+    color: var(--lighter-color) !important;
+    background: var(--border-color) !important;
+}
+
+button {
+    border: 1px solid var(--border-color);
+    background: var(--light-color);
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 var(--dark-shadow-color);
+}
+
+button:active {
+    box-shadow: none;
+}
+
+button:disabled, input:disabled, textarea:disabled {
+    opacity: 0.5;
+}
+
+// For mobile phones
+@media (max-width: 750px) {
+    body {
+        margin: 10px;
+        background-size: cover;
+    }
+}
+
+p.error {
+    padding: 5px;
+    border: 1px dashed darkred;
+    background: rgb(255, 199, 199);
+    color: darkred;
+    border-radius: 5px;
+}
+
+p.info {
+    padding: 5px;
+    border: 1px dashed blue;
+    background: rgb(199, 199, 255);
+    color: blue;
+    border-radius: 5px;
+}
+
+input, textarea {
+    padding: 5px;
+    appearance: none;
+    border: 1px solid var(--border-color);
+    font-family: serif;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 var(--dark-shadow-color) inset;
+}
+
+p.center {
+    text-align: center;
+}

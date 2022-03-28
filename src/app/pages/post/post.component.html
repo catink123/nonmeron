@@ -1,0 +1,25 @@
+<p *ngIf="loading">Загрузка...</p>
+<ng-container *ngIf="!loading">
+    <div class="imageContainer">
+        <img [src]="imageURL" *ngIf="!imageLoading">
+        <p *ngIf="imageLoading">Картинка загружается...</p>
+    </div>
+    <a [href]="imageURL" target="_blank">Открыть оригинал</a>
+    <p>
+        <app-like-button></app-like-button>
+    </p>
+    <h2 class="title">{{ title }}</h2>
+    <p class="body">{{ body }}</p>
+    <div class="tags">
+        <p>Теги:</p>
+        <a *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
+    </div>
+    <p class="timestamp">Пост от {{ timestamp | date : 'medium' }}</p>
+    <div class="comments">
+        <h2 class="title">Комментарии ({{ comments.length }})</h2>
+        <app-comment-box></app-comment-box>
+        <p *ngIf="commentsLoading">Загрузка...</p>
+        <app-comment *ngFor="let entry of comments" [comment]="entry.comment" [author]="entry.isAuthor"
+            [commentID]="entry.id"></app-comment>
+    </div>
+</ng-container>

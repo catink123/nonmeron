@@ -1,0 +1,38 @@
+<h1>Регистрация</h1>
+<p class="error" *ngIf="error.length > 0">{{ error }} <a routerLink="/login"
+        *ngIf="error == 'Этот Email уже используется.'">Перейти на страницу входа</a></p>
+
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+    <table>
+        <tr>
+            <td><span>Email: </span></td>
+            <td><input type="text" formControlName="email"></td>
+            <td class="errorContainer">
+                <!-- Registration form errors -->
+                <p class="error" *ngIf="registerForm.controls['email'].errors?.['pattern']">Уберите пробелы из поля
+                    Email.</p>
+                <p class="error" *ngIf="registerForm.controls['email'].errors?.['email']">Некорректный Email.</p>
+            </td>
+        </tr>
+        <tr>
+            <td><span>Никнейм: </span></td>
+            <td><input type="text" formControlName="nickname"></td>
+            <td>(изменить позже нельзя)</td>
+        </tr>
+        <!-- <ng-container formGroupName="passwordGroup">
+            <tr>
+                <td><span>Пароль: </span></td>
+                <td><input type="password" formControlName="password"></td>
+            </tr>
+            <tr>
+                <td><span>Подтвердите пароль: </span></td>
+                <td><input type="password" formControlName="confirmPassword"></td>
+            </tr>
+        </ng-container> -->
+        <tr>
+            <td><span>Пароль: </span></td>
+            <td><input type="password" formControlName="password"></td>
+        </tr>
+    </table>
+    <button type="submit" [disabled]="!registerForm.valid">Зарегистрироваться</button>
+</form>

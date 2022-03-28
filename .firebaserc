@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nonmeron-f2ec8": {
+      "hosting": {
+        "merona-and-nonoi": [
+          "nonmeron"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nonmeron-f2ec8"
+  }
+}

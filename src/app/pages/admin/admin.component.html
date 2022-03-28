@@ -1,0 +1,52 @@
+<h1>Добавить новый пост</h1>
+<form [formGroup]="addPostForm" (submit)="submit()">
+    <table>
+        <tr>
+            <td>
+                <span>ID: </span>
+            </td>
+            <td><input type="text" formControlName="id"></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Название: </span>
+            </td>
+            <td><input type="text" formControlName="title"></td>
+            <td><span>(необязательно)</span></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Описание: </span>
+            </td>
+            <td><input type="text" formControlName="description"></td>
+            <td><span>(необязательно)</span></td>
+        </tr>
+        <!-- <tr>
+            <td>
+                <span>Путь к полной картинке: </span>
+            </td>
+            <td><input type="text" formControlName="fullImage"></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Путь к малой картинке: </span>
+            </td>
+            <td><input type="text" formControlName="thumbnailImage"></td>
+        </tr> -->
+        <tr>
+            <td><span>Картинка: </span></td>
+            <td><input type="file" (change)="onFileChange($event)"></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Теги: </span>
+            </td>
+            <td><input type="text" formControlName="tags"></td>
+            <td><span>(отделять через запятую)</span></td>
+        </tr>
+    </table>
+    <button type="submit" [disabled]="!addPostForm.valid">Отправить пост</button>
+</form>
+
+<p class="info" *ngIf="hasPosted">Пост успешно отправлен.</p>
+<p class="error" *ngIf="error.length > 0">{{ error }}</p>

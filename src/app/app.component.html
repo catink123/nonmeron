@@ -1,0 +1,33 @@
+<header>
+  <h1 class="logo">Non&Meron</h1>
+  <div class="links">
+    <a routerLink="">главная</a>
+    <p class="sep">|</p>
+    <a routerLink="about">цель сайта</a>
+    <p class="sep">|</p>
+    <a routerLink="account">аккаунт</a>
+    <p class="sep" *ngIf="isAdmin">|</p>
+    <a routerLink="admin" *ngIf="isAdmin">админ панель</a>
+  </div>
+</header>
+
+<main>
+  <div class="routerContainer">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="sidenav">
+    <h3>Теги</h3>
+    <div class="tags">
+      <ng-container *ngIf="(tags | async); else loading">
+        <a *ngFor="let tag of tags | async" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
+      </ng-container>
+      <ng-template #loading>
+        <p class="center">Загрузка...</p>
+      </ng-template>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p class="center">2022 Merona & Nonoi. Копирайта нет, но вы держитесь.</p>
+</footer>

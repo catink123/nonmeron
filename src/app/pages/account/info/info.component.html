@@ -1,0 +1,14 @@
+<h1>Аккаунт</h1>
+<ng-container *ngIf="!loading">
+    <ng-container *ngIf="isLoggedIn">
+        <p>Ник: {{ nickname }}</p>
+        <button (click)="logout()">Выйти</button>
+    </ng-container>
+    <ng-container *ngIf="!isLoggedIn">
+        <p>Вход в аккаунт не произведён.</p>
+        <button (click)="login()">Войти</button>
+    </ng-container>
+</ng-container>
+<ng-container *ngIf="loading">
+    <p>Загрузка...</p>
+</ng-container>

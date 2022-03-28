@@ -1,0 +1,8 @@
+<h3>Оставить комментарий</h3>
+<p class="info" *ngIf="!isLoggedIn">Войдите в аккаунт, чтобы оставить комментарий. <a routerLink="/login">Перейти на страницу входа</a></p>
+<textarea maxlength="500" [formControl]="comment"></textarea>
+<p>
+    <button (click)="submit()" [disabled]="!comment.valid || !isLoggedIn">Отправить</button>
+    <span *ngIf="isLoggedIn"> (как {{ nickname }})</span>
+</p>
+<br>

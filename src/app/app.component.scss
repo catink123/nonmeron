@@ -1,0 +1,108 @@
+header {
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: flex-end;
+    color: var(--light-color);
+    border-radius: 13px 13px 0 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1.logo {
+    padding: 5px 15px;
+    margin: 0;
+    font-size: 55px;
+    border-bottom: 2px solid var(--border-color);
+    box-sizing: border-box;
+    user-select: none;
+    width: 100%;
+    text-align: center;
+}
+
+div.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.links > a {
+    padding: 5px;
+    text-decoration: none;
+    color: var(--light-color);
+    text-align: center;
+    word-wrap: none;
+    font-size: 20px;
+}
+
+div.links > p.sep {
+    margin: auto 5px;
+    user-select: none;
+}
+
+div.sidenav {
+    border-left: 2px solid var(--border-color);
+    grid-area: s;
+    display: flex;
+    flex-direction: column;
+}
+
+div.sidenav > h3 {
+    margin: 0;
+    padding: 7px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+div.sidenav > div.tags {
+    display: flex;
+    flex-direction: column;
+}
+
+div.tags > a {
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+main {
+    display: grid;
+    grid-template: "r s" 1fr / 1fr 200px;
+}
+
+.routerContainer {
+    grid-area: r;
+    padding: 10px;
+    overflow: auto;
+}
+
+header {
+    background: var(--dark-color);
+}
+
+main, footer {
+    background: var(--light-color-transparent);
+}
+
+footer {
+    border-top: 2px solid var(--border-color);
+    border-radius: 0 0 13px 13px;
+}
+
+footer > p {
+    margin: 0;
+    padding: 5px;
+}
+
+// For mobile phones
+@media (max-width: 750px) {
+    main {
+        grid-template:  "r" 1fr
+                        "s" auto / 1fr;
+    }
+
+    div.sidenav {
+        border-top: 2px solid var(--border-color);
+        border-left: none;
+    }
+}

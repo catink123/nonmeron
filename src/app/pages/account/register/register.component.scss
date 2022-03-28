@@ -1,0 +1,12 @@
+td > p {
+    margin: 0;
+}
+
+td > p.error {
+    padding: 4px;
+}
+
+td.errorContainer {
+    display: flex;
+    gap: 5px;
+}

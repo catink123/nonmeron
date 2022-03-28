@@ -1,0 +1,10 @@
+button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button.liked {
+    background: var(--active-color);
+    border-color: var(--active-color);
+    color: var(--lighter-color);
+}

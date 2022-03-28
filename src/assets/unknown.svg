@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4608"
+   height="3072"
+   viewBox="0 0 1219.2 812.80002"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="unknown.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title1163">Unknown</title>
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="true"
+     units="px"
+     width="4608px"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="2378.7072"
+     inkscape:cy="1436.841"
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
+     inkscape:window-x="-8"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824"
+       color="#3f3fff"
+       opacity="0.54901961"
+       empcolor="#3f3fff"
+       empopacity="1"
+       enabled="true"
+       visible="true"
+       snapvisiblegridlinesonly="false"
+       dotted="true" />
+    <sodipodi:guide
+       position="613.83333,431.80001"
+       orientation="0,-1"
+       id="guide830" />
+    <sodipodi:guide
+       position="613.83333,431.80001"
+       orientation="1,0"
+       id="guide832" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:none;stroke-linecap:round;stroke-miterlimit:4.08420992;stroke:#f9eed2;stroke-opacity:1;stroke-width:39.68750049;stroke-dasharray:none"
+       id="path858"
+       cx="615.15625"
+       cy="381.52917"
+       r="125.94167" />
+    <path
+       style="fill:none;stroke:#f9eed2;stroke-width:39.68750049;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 699.02918,296.33334 529.16668,466.19585"
+       id="path1061" />
+  </g>
+  <metadata
+     id="metadata1161">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Unknown</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

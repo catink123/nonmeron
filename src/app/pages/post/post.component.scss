@@ -1,0 +1,33 @@
+img {
+    aspect-ratio: 4608 / 3072;
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    background: var(--dark-shadow-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 var(--dark-shadow-color);
+}
+
+div.imageContainer {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    display: grid;
+    place-items: center;
+}
+
+div.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+div.tags {
+    display: flex;
+    gap: 7px;
+}
+
+div.tags > p {
+    margin: 0;
+}
