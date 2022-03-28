@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Timestamp } from '@angular/fire/firestore';
 import { concat, Observable } from 'rxjs';
-import { finalize, concatAll } from 'rxjs/operators';
+import { finalize, concatWith } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { PostService } from './post.service';
 
