@@ -21,18 +21,6 @@
             <td><input type="text" formControlName="description"></td>
             <td><span>(необязательно)</span></td>
         </tr>
-        <!-- <tr>
-            <td>
-                <span>Путь к полной картинке: </span>
-            </td>
-            <td><input type="text" formControlName="fullImage"></td>
-        </tr>
-        <tr>
-            <td>
-                <span>Путь к малой картинке: </span>
-            </td>
-            <td><input type="text" formControlName="thumbnailImage"></td>
-        </tr> -->
         <tr>
             <td><span>Картинка: </span></td>
             <td><input type="file" (change)="onFileChange($event)"></td>
@@ -48,5 +36,16 @@
     <button type="submit" [disabled]="!addPostForm.valid">Отправить пост</button>
 </form>
 
+<ng-container *ngIf="isUploading">
+    <p class="info">Идёт загрузка изображений... Не покидайте эту страницу во время загрузки!</p>
+    <p>Полное изображение: 
+        <span *ngIf="fullImageProgress < 1">{{ fullImageProgress | percent }}</span>
+        <span *ngIf="fullImageProgress === 1">Готово</span>
+    </p>
+    <p>Миниатюрное изображение: 
+        <span *ngIf="thumbnailImageProgress < 1">{{ thumbnailImageProgress | percent }}</span>
+        <span *ngIf="thumbnailImageProgress === 1">Готово</span>
+    </p>
+</ng-container>
 <p class="info" *ngIf="hasPosted">Пост успешно отправлен.</p>
 <p class="error" *ngIf="error.length > 0">{{ error }}</p>

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -22,6 +23,10 @@ export class AdminComponent {
   });
   hasPosted = false;
   error = '';
+
+  isUploading = false;
+  fullImageProgress = 0;
+  thumbnailImageProgress = 0;
 
   constructor(
     private authService: AuthService, 
@@ -55,16 +60,25 @@ export class AdminComponent {
     fr.onload = () => {
       const fullImage = fr.result as string;
       (async () => {
-        const thumbnailImage = await ImageResizer.reduceSize(fullImage, 461, 308, 'image/jpeg');
+        const thumbnailImage = await ImageResizer.reduceSize(fullImage, 461, 461, 'image/jpeg');
         try {
-          const uploadProcess = await this.adminService.addPost({
-            id, title, description, fullImage, thumbnailImage,
+          const info = {
+            id, title, description, fullImage: image, thumbnailImage,
             tags: cutTags
+          };
+          const uploadProcess = await this.adminService.addPost(info);
+          this.isUploading = true;
+          uploadProcess?.subscribe((utSnapshot: UploadTaskSnapshot | void) => {
+            if (utSnapshot) {
+              if (utSnapshot.ref.name === 'full.jpg')
+                this.fullImageProgress = utSnapshot.bytesTransferred / utSnapshot.totalBytes;
+              if (utSnapshot.ref.name === 'thumbnail.jpg')
+                this.thumbnailImageProgress = utSnapshot.bytesTransferred / utSnapshot.totalBytes;
+              if (this.fullImageProgress === 1 && this.thumbnailImageProgress === 1) this.hasPosted = true;
+            }
           });
-          uploadProcess?.subscribe(val => {
-            console.log(val);
-          })
         } catch (reason) {
+          console.error('error:', reason);
           setError(reason);
         }
       })();
