@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageScrollService } from '../page-scroll.service';
 import { PostService } from '../post.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class PostCardComponent implements OnInit {
   image = '';
   imageLoading = true;
   @Input() title = 'Загрузка...';
-  constructor(private router: Router, private postService: PostService) { }
+  constructor(private router: Router, private postService: PostService, private scrollService: PageScrollService) { }
 
   async ngOnInit() {
     const onFail = (reason?: any) => {
@@ -28,19 +29,6 @@ export class PostCardComponent implements OnInit {
           this.image = url;
           this.imageLoading = false;
         }, onFail);
-      /* const imagesRef = await this.postService.getImages(this.id);
-      imagesRef.listAll().subscribe(listResult => {
-        if (listResult.items.length === 0) onFail();
-        listResult
-          .items
-          .filter(val => val.name === 'thumbnail.jpg')[0]
-          .getDownloadURL()
-          .then(url => {
-            this.image = url;
-            this.imageLoading = false;
-          })
-          .catch(onFail);
-      }); */
     } catch (reason) {
       console.error("Couldn't get images with reason:", reason);
       onFail();
@@ -48,6 +36,7 @@ export class PostCardComponent implements OnInit {
   }
 
   open() {
+    this.scrollService.saveCurrentPosition();
     this.router.navigate(['post', this.id]);
   }
 }

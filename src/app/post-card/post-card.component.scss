@@ -1,30 +1,28 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
+    position: relative;
+    // width: 300px;
+    aspect-ratio: 461 / 307;
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0 3px 5px 0 var(--dark-shadow-color);
     overflow: hidden;
-    background: var(--light-color);
+    background: var(--dark-color);
     transition-duration: .1s;
+    color: white;
+    box-shadow: 0 3px 5px 0 var(--dark-more-transparent-color);
 }
 
 :host:hover {
-    border-color: var(--hover-color);
-    background: var(--lighter-color);
+    background: var(--lighter-dark-color);
 }
 
 :host:active {
-    background: var(--active-color);
-    color: var(--lighter-color);
+    transform: scale(0.98);
     box-shadow: none;
 }
 
 img {
     object-fit: cover;
-    aspect-ratio: 4 / 3;
-    border-bottom: 1px solid var(--secondary-color);
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -36,9 +34,12 @@ footer {
 }
 
 p.title {
-    flex-grow: 1;
-    margin: 7px;
+    padding: 7px;
     text-align: center;
+    position: absolute;
+    bottom: 0;
+    background: var(--dark-transparent-color);
+    margin: 0;
 }
 
 button {

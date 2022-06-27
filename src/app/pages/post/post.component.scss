@@ -4,9 +4,9 @@ img {
     height: auto;
     max-height: 400px;
     object-fit: contain;
-    background: var(--dark-shadow-color);
+    background: var(--dark-transparent-color);
     border-radius: 10px;
-    box-shadow: 0 5px 10px 0 var(--dark-shadow-color);
+    box-shadow: 0 5px 10px 0 var(--dark-more-transparent-color);
 }
 
 div.imageContainer {
@@ -30,4 +30,9 @@ div.tags {
 
 div.tags > p {
     margin: 0;
+}
+
+div.tags > a {
+    padding: 0;
+    text-decoration: underline;
 }

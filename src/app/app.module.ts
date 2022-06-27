@@ -24,6 +24,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { AdminComponent } from './pages/admin/admin.component';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { MultiselectComponent } from './components/multiselect/multiselect.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     LikeButtonComponent,
     SearchComponent,
     PageNotFoundComponent,
-    AdminComponent
+    AdminComponent,
+    MultiselectComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     FormsModule,
     ReactiveFormsModule,
     AngularFireAnalyticsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService,

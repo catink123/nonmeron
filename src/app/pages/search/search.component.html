@@ -1,5 +1,5 @@
-<!-- <h2>Параметры поиска</h2>
-<form [formGroup]="searchParamsForm" (submit)="submitSearch()">
+<h2>Параметры поиска</h2>
+<!-- <form [formGroup]="searchParamsForm" (submit)="submitSearch()">
     <table>
         <tr>
             <td><span>Название: </span></td>
@@ -11,20 +11,27 @@
         </tr>
     </table>
     <button type="submit">Поиск</button>
-</form>
-<p><button (click)="help()">Помощь</button></p> -->
+</form> -->
+<!-- <p><button (click)="help()">Помощь</button></p> -->
+<div class="inlineContainer">
+    <app-multiselect [(entries)]="selectedTags">Выбрать теги</app-multiselect>
+    <button (click)="submitSearch()">Поиск</button>
+</div>
 
 <ng-container *ngIf="!isLoading">
-    <h1>Поиск по 
-        <span *ngIf="tags.length === 1">тегу "{{ tags[0] }}"</span>
-        <span *ngIf="tags.length > 1">тегам <span *ngFor="let tag of tags">"{{ tag }}" </span></span>
-    </h1>
-    <div class="postCardContainer">
-        <app-post-card
-            *ngFor="let post of filteredPosts"
-            [title]="post.title"
-            [id]="post.id"></app-post-card>
-    </div>
+    <ng-container *ngIf="filteredPosts.length > 0">
+        <h1>Поиск по
+            <span *ngIf="tags.length === 1">тегу "{{ tags[0] }}"</span>
+            <span *ngIf="tags.length > 1">тегам <span *ngFor="let tag of tags">"{{ tag }}" </span></span>
+        </h1>
+        <div class="cardContainer">
+            <app-post-card
+                *ngFor="let post of filteredPosts"
+                [title]="post.title"
+                [id]="post.id"></app-post-card>
+        </div>
+    </ng-container>
+    <h1 *ngIf="filteredPosts.length === 0">Нет совпадений с параметрами поиска</h1>
 </ng-container>
 <ng-container *ngIf="isLoading">
     <h1>Поиск...</h1>

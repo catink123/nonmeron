@@ -1,0 +1,65 @@
+button.active {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+div.dropdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: white;
+    position: absolute;
+    background: var(--dark-color);
+    box-shadow: var(--control-shadow);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 2;
+    margin-top: 2px;
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 5px 2px 2px;
+    transition-duration: .1s;
+    font-size: 14px;
+}
+
+label:hover {
+    background: var(--lighter-dark-color);
+}
+
+label:active {
+    background: white;
+    color: black;
+}
+
+input[type=checkbox] {
+    background: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+input[type=checkbox]:checked {
+    background: var(--accent-color);
+    box-shadow: none;
+}
+
+// input[type=checkbox]::before {
+//     content: '';
+//     display: inline-block;
+//     background: white;
+//     border-radius: 5px;
+//     width: 30px;
+//     height: 30px;
+// }
+
+// input[type=checkbox]:checked::after {
+//     position: absolute;
+//     text-align: center;
+//     width: 15px;
+//     height: 15px;
+//     background: var(--accent-color);
+//     content: '';
+// }

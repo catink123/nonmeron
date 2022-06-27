@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body {
+/* body {
     // --dark-color: #47271b;
     --dark-color: hsl(16, 25%, 19%);
     // --darker-color: #291a15;
@@ -18,49 +18,100 @@ body {
     background-attachment: fixed;
     color: var(--darker-color);
     border-radius: 15px;
+} */
+
+:root {
+    --shadow: 0 0 15px 5px black;
+    --control-shadow: 0 3px 5px 0 var(--dark-more-transparent-color);
+    --dark-color: #222;
+    --dark-transparent-color: #222222CC;
+    --dark-more-transparent-color: #22222288;
+    --lighter-dark-color: #777;
+    --light-color: #CCC;
+    --light-transparent-color: #CCCCCCCC;
+    --accent-color: #a561dd;
+    --darker-accent-color: #6f5386;
 }
 
-a, button {
-    color: var(--darker-color);
-    user-select: none;
-    appearance: none;
-    cursor: pointer;
-    transition-duration: .1s;
-    -webkit-tap-highlight-color: transparent;
+body {
+    margin: 0;
+    padding: 10px 0;
+    background: url(assets/backdrop.jpg);
+    background-size: contain;
+    background-attachment: fixed;
+    font-family: 'Inter';
 }
 
-a:hover, button:hover {
-    background: var(--lighter-color) !important;
-    color: var(--darker-color) !important;
+@media (max-width: 575px) {
+    body {
+        padding: 0;
+        background-size: cover;
+    }
 }
 
-a:active, button:active {
-    color: var(--lighter-color) !important;
-    background: var(--border-color) !important;
-}
-
-button {
-    border: 1px solid var(--border-color);
-    background: var(--light-color);
-    padding: 7px;
-    border-radius: 5px;
-    box-shadow: 0 3px 3px 0 var(--dark-shadow-color);
-}
-
-button:active {
-    box-shadow: none;
-}
-
-button:disabled, input:disabled, textarea:disabled {
+button:disabled,
+input:disabled,
+textarea:disabled {
     opacity: 0.5;
 }
 
-// For mobile phones
-@media (max-width: 750px) {
-    body {
-        margin: 10px;
-        background-size: cover;
-    }
+/* Screen Elements */
+
+a {
+    color: black;
+    font-weight: 300;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:hover {
+    background: #FFFFFF44;
+}
+
+a:active {
+    background: white;
+}
+
+button.special {
+    user-select: none;
+    appearance: none;
+    border: 1px solid white;
+    padding: 5px;
+    background: var(--light-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+button.special:hover {
+    background: #FFFFFF44;
+}
+
+button.special:active {
+    background: white;
+    color: black;
+}
+
+button {
+    background: var(--dark-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    user-select: none;
+    appearance: none;
+    border: 1px solid var(--dark-color);
+    padding: 5px;
+    box-shadow: 0 3px 5px 0 var(--dark-more-transparent-color);
+    transition-duration: .1s;
+}
+
+button:hover {
+    border-color: var(--lighter-dark-color);
+    background: var(--lighter-dark-color);
+}
+
+button:active {
+    background: white;
+    border-color: white;
+    color: black;
+    box-shadow: none;
 }
 
 p.error {
@@ -68,7 +119,6 @@ p.error {
     border: 1px dashed darkred;
     background: rgb(255, 199, 199);
     color: darkred;
-    border-radius: 5px;
 }
 
 p.info {
@@ -76,18 +126,38 @@ p.info {
     border: 1px dashed blue;
     background: rgb(199, 199, 255);
     color: blue;
-    border-radius: 5px;
 }
 
-input, textarea {
+input,
+textarea {
     padding: 5px;
     appearance: none;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--dark-color);
     font-family: serif;
-    border-radius: 5px;
-    box-shadow: 0 3px 3px 0 var(--dark-shadow-color) inset;
+    box-shadow: 0 3px 5px 0 var(--dark-more-transparent-color) inset;
+}
+
+label {
+    user-select: none;
 }
 
 p.center {
     text-align: center;
+}
+
+div.cardContainer {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+@media (max-width: 575px) {
+    div.cardContainer {
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    }
+}
+
+div.inlineContainer {
+    display: flex;
+    gap: 5px;
 }

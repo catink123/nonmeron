@@ -1,7 +1,9 @@
-<ng-container *ngIf="!isLoading">
-    <app-post-card
-        *ngFor="let post of posts"
-        [title]="post.title"
-        [id]="post.id"></app-post-card>
-</ng-container>
+<div class="cardContainer" *ngIf="!isLoading">
+    <!-- <ng-container *ngIf="!isLoading"> -->
+        <app-post-card
+            *ngFor="let post of posts"
+            [title]="post.title"
+            [id]="post.id"></app-post-card>
+    <!-- </ng-container> -->
+</div>
 <p *ngIf="isLoading">Загрузка...</p>

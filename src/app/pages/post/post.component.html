@@ -4,7 +4,7 @@
         <img [src]="imageURL" *ngIf="!imageLoading">
         <p *ngIf="imageLoading">Картинка загружается...</p>
     </div>
-    <a [href]="imageURL" target="_blank">Открыть оригинал</a>
+    <a class="dark" [href]="imageURL" target="_blank">Открыть оригинал</a>
     <p>
         <app-like-button></app-like-button>
     </p>
@@ -12,7 +12,7 @@
     <p class="body">{{ body }}</p>
     <div class="tags">
         <p>Теги:</p>
-        <a *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
+        <a class="dark" *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
     </div>
     <p class="timestamp">Пост от {{ timestamp | date : 'medium' }}</p>
     <div class="comments">
