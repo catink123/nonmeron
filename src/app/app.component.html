@@ -1,33 +1,46 @@
-<header>
-  <h1 class="logo">Non&Meron</h1>
+<div class="mainContainer">
+  <header>
+    <h1 class="logo">Non&Meron</h1>
+  </header>
+  
   <div class="links">
-    <a routerLink="">главная</a>
-    <p class="sep">|</p>
-    <a routerLink="about">цель сайта</a>
-    <p class="sep">|</p>
-    <a routerLink="account">аккаунт</a>
-    <p class="sep" *ngIf="isAdmin">|</p>
-    <a routerLink="admin" *ngIf="isAdmin">админ панель</a>
+    <a routerLink="">Главная</a>
+    <a routerLink="search">Поиск</a>
+    <a routerLink="account">Аккаунт</a>
+    <a routerLink="admin" *ngIf="isAdmin">АдминПанель</a>
   </div>
-</header>
 
-<main>
-  <div class="routerContainer">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="sidenav">
-    <h3>Теги</h3>
-    <div class="tags">
-      <ng-container *ngIf="(tags | async); else loading">
-        <a *ngFor="let tag of tags | async" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
-      </ng-container>
-      <ng-template #loading>
-        <p class="center">Загрузка...</p>
-      </ng-template>
+  <main>
+    <div class="routerContainer">
+      <router-outlet></router-outlet>
     </div>
-  </div>
-</main>
+  </main>
 
-<footer>
-  <p class="center">2022 Merona & Nonoi. Копирайта нет, но вы держитесь.</p>
-</footer>
+  <footer>
+    2022 Merona & Nonoi. Копирайта нет, но вы держитесь.
+  </footer>
+</div>
+
+<div class="messageContainer" *ngIf="showWelcomeWindow" [@welcomeScreen]="showWelcomeWindow">
+  <div class="message">
+
+    <h1>
+      Добро пожаловать на сайт Non&amp;Meron!
+    </h1>
+
+    <p>
+      Non&amp;Meron ― веб-сайт двух человек с никнеймами Nonoi и Merona, которые выкладывают здесь фотографии в виде
+      постов.
+    </p>
+    <p>
+      Разработчик - Merona (@catink123 во всех соц. сетях)
+    </p>
+    <p>
+      Дизайнеры - Merona, Nonoi (@nonoi_the_maid)
+    </p>
+
+    <button (click)="confirmWelcomeWindow()">
+      Закрыть
+    </button>
+  </div>
+</div>
