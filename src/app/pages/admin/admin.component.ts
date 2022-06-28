@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/admin.service';
@@ -31,7 +31,7 @@ export class AdminComponent {
   constructor(
     private authService: AuthService, 
     private router: Router, 
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private cd: ChangeDetectorRef,
     private adminService: AdminService,
     private analytics: AngularFireAnalytics,

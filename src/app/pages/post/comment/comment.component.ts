@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/post.service';
 import { FormattedComment } from '../post.component';
@@ -15,7 +15,7 @@ export class CommentComponent {
   @Input() author: boolean = false;
   @Input() commentID: string = '';
   isEditing = false;
-  editedComment = new FormControl('', [Validators.required, Validators.maxLength(500)]);
+  editedComment = new UntypedFormControl('', [Validators.required, Validators.maxLength(500)]);
 
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 

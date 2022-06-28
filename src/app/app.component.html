@@ -1,26 +1,4 @@
-<!-- <div class="mainContainer">
-  <header>
-    <h1 class="logo">Non&Meron</h1>
-  </header>
-  
-  <div class="links">
-    <a routerLink="">Главная</a>
-    <a routerLink="search">Поиск</a>
-    <a routerLink="account">Аккаунт</a>
-    <a routerLink="admin" *ngIf="isAdmin">АдминПанель</a>
-  </div>
-
-  <main>
-    <div class="routerContainer">
-      <router-outlet></router-outlet>
-    </div>
-  </main>
-
-  <footer>
-    2022 Merona & Nonoi. Копирайта нет, но вы держитесь.
-  </footer>
-</div>
-
+<!--
 <div class="messageContainer" *ngIf="showWelcomeWindow" [@welcomeScreen]="showWelcomeWindow">
   <div class="message">
 
@@ -62,8 +40,10 @@
     </a>
     <a routerLink="account">
       <span class="material-symbols-outlined ms-filled">account_circle</span>
-      <span *ngIf="nickname.length > 0">{{ nickname }}</span>
-      <span *ngIf="nickname.length === 0">Аккаунт</span>
+      <ng-container *ngIf="showToolbarLabels">
+        <span *ngIf="nickname.length > 0">{{ nickname }}</span>
+        <span *ngIf="nickname.length === 0">Аккаунт</span>
+      </ng-container>
     </a>
   </div>
 </header>

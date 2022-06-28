@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
@@ -11,7 +11,7 @@ import { checkPasswords } from 'src/app/customValidators';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
-  email = new FormControl('', [Validators.email, Validators.required]);
+  email = new UntypedFormControl('', [Validators.email, Validators.required]);
   isSubmitted = false;
 
   // resetForm = new FormGroup({

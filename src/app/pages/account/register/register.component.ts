@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
@@ -26,7 +26,7 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService, 
-    private formBuilder: FormBuilder, 
+    private formBuilder: UntypedFormBuilder, 
     private router: Router, 
     private afs: AngularFirestore,
     private analytics: AngularFireAnalytics,

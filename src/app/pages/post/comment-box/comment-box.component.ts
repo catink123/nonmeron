@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { PostService } from 'src/app/post.service';
@@ -13,7 +13,7 @@ import { PostService } from 'src/app/post.service';
 })
 export class CommentBoxComponent {
   isLoggedIn = false;
-  comment = new FormControl({ value: '', disabled: false }, [Validators.required, Validators.maxLength(500)]);
+  comment = new UntypedFormControl({ value: '', disabled: false }, [Validators.required, Validators.maxLength(500)]);
   nickname = '...';
 
   showCommentBox = false;

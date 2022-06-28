@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MultiselectEntry } from 'src/app/components/multiselect/multiselect.component';
@@ -24,7 +24,7 @@ export class SearchComponent {
   constructor(
     private postService: PostService, 
     private route: ActivatedRoute, 
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private analytics: AngularFireAnalytics,
     private title: Title,
     private router: Router
