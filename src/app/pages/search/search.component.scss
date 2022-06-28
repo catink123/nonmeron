@@ -7,6 +7,64 @@ div.postCardContainer {
 
 h1 {
     text-align: center;
+    margin: 5px 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+div.inlineContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+main {
+    display: grid;
+    grid-template-columns: auto 350px;
+    grid-template-areas: "result options";
+    gap: 10px;
+}
+
+div.resultContainer {
+    grid-area: result;
+}
+
+div.optionsContainer {
+    grid-area: options;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    button.main {
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .tagSelect {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 5px;
+    }
+}
+
+@media (max-width: 970px) {
+    main {
+        grid-template-rows: auto auto;
+        grid-template-columns: none;
+        grid-template-areas: "options" "result";
+    }
+
+    div.commentsContainer > button {
+        width: fit-content;
+    }
 }
 
 // For mobile phones

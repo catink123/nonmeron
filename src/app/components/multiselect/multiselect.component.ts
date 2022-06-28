@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface MultiselectEntry {
   label: string, 
@@ -11,20 +11,25 @@ export interface MultiselectEntry {
   templateUrl: './multiselect.component.html',
   styleUrls: ['./multiselect.component.scss']
 })
-export class MultiselectComponent {
+export class MultiselectComponent implements OnChanges {
   @Input() entries?: MultiselectEntry[];
   selectedEntries: string[] = [];
   @Output() entriesChange = new EventEmitter<MultiselectEntry[]>();
   dropdownShown = false;
 
   constructor() {
-    document.addEventListener('click', (e: any) => {
+    /* document.addEventListener('click', (e: any) => {
       if (
         e.target.id !== 'dropdownButton' && 
         !e.path.map((val: any) => val.id).includes('dropdown') && 
         this.dropdownShown
       ) this.dropdownShown = false;
-    })
+    }) */
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.entries)
+      this.selectedEntries = this.entries.filter(val => val.checked).map(val => val.value);
   }
 
   select(value: string, event: any) {

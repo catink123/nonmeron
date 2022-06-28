@@ -1,39 +1,27 @@
-<h2>Параметры поиска</h2>
-<!-- <form [formGroup]="searchParamsForm" (submit)="submitSearch()">
-    <table>
-        <tr>
-            <td><span>Название: </span></td>
-            <td><input type="text" formControlName="title"></td>
-        </tr>
-        <tr>
-            <td><span>Теги: </span></td>
-            <td><input type="text" formControlName="tags"></td>
-        </tr>
-    </table>
-    <button type="submit">Поиск</button>
-</form> -->
-<!-- <p><button (click)="help()">Помощь</button></p> -->
-<div class="inlineContainer">
-    <app-multiselect [(entries)]="selectedTags">Выбрать теги</app-multiselect>
-    <button (click)="submitSearch()">Поиск</button>
-</div>
+<main>
+    <div class="resultContainer mainShape">
+        <ng-container *ngIf="!isLoading">
+            <ng-container *ngIf="filteredPosts.length > 0">
+                <h1>Поиск по
+                    <span *ngIf="tags.length === 1">тегу "{{ tags[0] }}"</span>
+                    <span *ngIf="tags.length > 1">тегам <span *ngFor="let tag of tags">"{{ tag }}" </span></span>
+                </h1>
+                <div class="cardContainer">
+                    <app-post-card *ngFor="let post of filteredPosts" [title]="post.title" [id]="post.id"></app-post-card>
+                </div>
+            </ng-container>
+            <h1 *ngIf="filteredPosts.length === 0">Нет совпадений с параметрами поиска</h1>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+            <h1>Поиск...</h1>
+            <p>Загрузка...</p>
+        </ng-container>
+    </div>
 
-<ng-container *ngIf="!isLoading">
-    <ng-container *ngIf="filteredPosts.length > 0">
-        <h1>Поиск по
-            <span *ngIf="tags.length === 1">тегу "{{ tags[0] }}"</span>
-            <span *ngIf="tags.length > 1">тегам <span *ngFor="let tag of tags">"{{ tag }}" </span></span>
-        </h1>
-        <div class="cardContainer">
-            <app-post-card
-                *ngFor="let post of filteredPosts"
-                [title]="post.title"
-                [id]="post.id"></app-post-card>
-        </div>
-    </ng-container>
-    <h1 *ngIf="filteredPosts.length === 0">Нет совпадений с параметрами поиска</h1>
-</ng-container>
-<ng-container *ngIf="isLoading">
-    <h1>Поиск...</h1>
-    <p>Загрузка...</p>
-</ng-container>
+    <div class="optionsContainer mainShape">
+        <h2>Параметры</h2>
+        <h3>Теги:</h3>
+        <app-multiselect class="tagSelect" [(entries)]="selectedTags">Выбрать теги</app-multiselect>
+        <button class="colored main" (click)="submitSearch()">Поиск</button>
+    </div>
+</main>

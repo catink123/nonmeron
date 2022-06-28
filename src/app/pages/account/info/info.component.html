@@ -1,14 +1,18 @@
-<h1>Аккаунт</h1>
-<ng-container *ngIf="!loading">
-    <ng-container *ngIf="isLoggedIn">
-        <p>Ник: {{ nickname }}</p>
-        <button (click)="logout()">Выйти</button>
-    </ng-container>
-    <ng-container *ngIf="!isLoggedIn">
-        <p>Вход в аккаунт не произведён.</p>
-        <button (click)="login()">Войти</button>
-    </ng-container>
-</ng-container>
-<ng-container *ngIf="loading">
-    <p>Загрузка...</p>
-</ng-container>
+<main class="windowContainer">
+    <div style="min-width: 200px;">
+        <h1>Аккаунт</h1>
+        <ng-container *ngIf="!loading">
+            <ng-container *ngIf="isLoggedIn">
+                <p>Ник: {{ nickname }}</p>
+                <button style="width: 100%" (click)="logout()">Выйти</button>
+            </ng-container>
+            <ng-container *ngIf="!isLoggedIn">
+                <p>Вход в аккаунт не произведён.</p>
+                <button class="colored" style="width: 100%" (click)="login()">Войти</button>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="loading">
+            <p>Загрузка...</p>
+        </ng-container>
+    </div>
+</main>

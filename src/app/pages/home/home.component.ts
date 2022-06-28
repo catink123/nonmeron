@@ -16,9 +16,7 @@ export class HomeComponent implements AfterViewChecked {
     title.setTitle('Главная Non&Meron');
     postService.getPosts().subscribe(posts => {
       this.isLoading = true;
-      this.posts = posts.sort((a, b) =>
-        a.timestamp.toDate().getTime() > b.timestamp.toDate().getTime() ? -1 : 1
-      );
+      this.posts = posts;
       this.isLoading = false;
       scrollService.restoreSavedPosition();
     });

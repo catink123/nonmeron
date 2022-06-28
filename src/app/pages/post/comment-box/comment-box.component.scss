@@ -1,3 +1,8 @@
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
 textarea {
     resize: vertical;
     width: 100%;
@@ -6,5 +11,24 @@ textarea {
 }
 
 h3 {
-    margin-top: 0;
+    margin: 0;
+}
+
+div.commentBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: #333;
+    border-radius: 20px;
+}
+
+div.toolbar {
+    display: flex;
+    gap: 10px;
+}
+
+#showButton {
+    width: 100%;
+    text-align: center;
 }

@@ -1,3 +1,15 @@
-<p class="info" *ngIf="showMessage">Войдите в аккаунт, чтобы ставить лайк. <a routerLink="/login">Перейти на страницу входа</a></p>
-<button disabled *ngIf="isLoading">👍 ...</button>
-<button *ngIf="!isLoading" [ngClass]="likedByCurrentUser ? 'liked' : ''" (click)="like()" [disabled]="showMessage">👍 {{ likedBy.length }}</button>
+<p class="info" *ngIf="showMessage">Войдите в аккаунт, чтобы ставить отметку "Нравится". <a style="width: fit-content;" routerLink="/login">Перейти на страницу входа</a></p>
+<div class="container">
+    <button disabled *ngIf="isLoading">
+        <span class="material-symbols-outlined">favorite</span>
+        Нравится
+    </button>
+    <button *ngIf="!isLoading" [ngClass]="likedByCurrentUser ? 'liked' : ''" (click)="like()" [disabled]="showMessage">
+        <span class="material-symbols-outlined" *ngIf="!likedByCurrentUser">favorite</span>
+        <span class="material-symbols-outlined ms-filled likeIcon" *ngIf="likedByCurrentUser">favorite</span>
+        Нравится
+    </button>
+    <p *ngIf="likedBy.length === 0">Будьте первым, кто поставит отметку "Нравится"!</p>
+    <p *ngIf="likedBy.length === 1 && likedByCurrentUser">Нравится вам</p>
+    <p *ngIf="!(likedBy.length === 1 && likedByCurrentUser) && likedBy.length >= 1">Нравится {{ likedBy.length }} {{ likedBy.length === 1 ? 'человеку' : 'людям'}} {{likedByCurrentUser ? '(в том числе и вам)' : ''}}</p>
+</div>

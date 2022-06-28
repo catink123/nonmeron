@@ -1,49 +1,36 @@
-button.active {
-    background: white;
-    color: black;
-    border-color: white;
-}
-
-div.dropdown {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    color: white;
-    position: absolute;
-    background: var(--dark-color);
-    box-shadow: var(--control-shadow);
-    max-height: 240px;
-    overflow-y: auto;
-    z-index: 2;
-    margin-top: 2px;
-}
-
 label {
     display: inline-flex;
     align-items: center;
-    padding: 2px 5px 2px 2px;
-    transition-duration: .1s;
-    font-size: 14px;
+    gap: 5px;
+    // padding: 2px 5px 2px 2px;
+    transition-duration: .25s;
+    font-size: 18px;
+    border-radius: 20px;
+    padding: 5px;
+    background: #333;
 }
 
 label:hover {
-    background: var(--lighter-dark-color);
+    background: #555;
 }
 
 label:active {
     background: white;
     color: black;
+    transition-duration: 0s;
 }
 
 input[type=checkbox] {
+    appearance: none;
     background: white;
     width: 20px;
     height: 20px;
+    border-radius: 20px;
     text-align: center;
 }
 
 input[type=checkbox]:checked {
-    background: var(--accent-color);
-    box-shadow: none;
+    background: #c08edd;
 }
 
 // input[type=checkbox]::before {

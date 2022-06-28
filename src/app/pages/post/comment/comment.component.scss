@@ -1,75 +1,131 @@
-:host {
-    display: flex;
-    flex-direction: column;
-}
+// :host {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// div.comment {
+//     display: flex;
+//     flex-direction: column;
+//     padding: 5px;
+//     gap: 5px;
+//     border: 1px solid var(--dark-color);
+// }
+
+// // div.comment.authoringPresent {
+// //     border-radius: 10px 10px 10px 0;
+// // }
+
+// p {
+//     margin: 0;
+// }
+
+// p.time {
+//     margin-top: 3px;
+//     font-size: 10px;
+// }
+
+// p.author {
+//     font-weight: bold;
+//     border-bottom: 1px solid var(--dark-color);
+//     padding: 5px 0;
+//     // font-size: 18px;
+// }
+
+// div.authoring {
+//     width: fit-content;
+//     padding: 5px;
+//     display: flex;
+//     gap: 5px;
+//     border: 1px  solid var(--dark-color);
+//     border-top: none;
+//     // border-radius: 0 0 10px 10px;
+// }
+
+// textarea {
+//     min-height: 50px;
+// }
+
+// div.editingPanel {
+//     padding: 5px;
+//     border: 1px solid var(--dark-color);
+//     margin-top: 5px;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 5px;
+//     // border-radius: 5px;
+// }
+
+// div.comment, div.authoring, div.editingPanel {
+//     background: var(--light-color);
+//     box-shadow: 0 3px 5px 0 var(--dark-more-transparent-color);
+// }
+
+// div.editingPanel > div.authoring {
+//     border: none;
+//     padding: 0;
+//     box-shadow: none;
+// }
+
+// div.editingPanel > h3 {
+//     margin: 0;
+// }
+
+// div.editingPanel > textarea {
+//     resize: vertical;
+// }
 
 div.comment {
     display: flex;
     flex-direction: column;
-    padding: 5px;
-    gap: 5px;
-    border: 1px solid var(--dark-color);
+    background: #444;
+    border-radius: 20px;
+    padding: 10px;
+    gap: 10px;
+
+    p {
+        margin: 0;
+    }
+
+    p.author {
+        font-size: 20px;
+        background: #777;
+        padding: 5px 10px;
+        border-radius: 15px;
+        width: fit-content;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    p.timestamp {
+        font-size: 14px;
+        color: #aaa;
+    }
 }
 
-// div.comment.authoringPresent {
-//     border-radius: 10px 10px 10px 0;
-// }
-
-p {
-    margin: 0;
-}
-
-p.time {
-    margin-top: 3px;
-    font-size: 10px;
-}
-
-p.author {
-    font-weight: bold;
-    border-bottom: 1px solid var(--dark-color);
-    padding: 5px 0;
-    // font-size: 18px;
+div.comment.authoringPresent {
+    margin-bottom: 10px;
 }
 
 div.authoring {
-    width: fit-content;
-    padding: 5px;
     display: flex;
-    gap: 5px;
-    border: 1px  solid var(--dark-color);
-    border-top: none;
-    // border-radius: 0 0 10px 10px;
-}
-
-textarea {
-    min-height: 50px;
+    gap: 10px;
 }
 
 div.editingPanel {
-    padding: 5px;
-    border: 1px solid var(--dark-color);
-    margin-top: 5px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    // border-radius: 5px;
-}
+    gap: 10px;
+    padding: 10px;
+    background: #333;
+    border-radius: 20px;
 
-div.comment, div.authoring, div.editingPanel {
-    background: var(--light-color);
-    box-shadow: 0 3px 5px 0 var(--dark-more-transparent-color);
-}
+    h3 {
+        margin: 0;
+    }
 
-div.editingPanel > div.authoring {
-    border: none;
-    padding: 0;
-    box-shadow: none;
-}
-
-div.editingPanel > h3 {
-    margin: 0;
-}
-
-div.editingPanel > textarea {
-    resize: vertical;
+    div.authoring {
+        margin: 0;
+    }
 }

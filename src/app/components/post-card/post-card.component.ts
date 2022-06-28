@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PageScrollService } from '../page-scroll.service';
-import { PostService } from '../post.service';
+import { PageScrollService } from '../../page-scroll.service';
+import { PostService } from '../../post.service';
 
 @Component({
   selector: 'app-post-card',

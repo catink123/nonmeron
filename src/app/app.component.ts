@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import {animate, animateChild, group, query, state, style, transition, trigger} from '@angular/animations';
 import { ChildrenOutletContexts } from '@angular/router';
+import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -48,43 +49,38 @@ import { ChildrenOutletContexts } from '@angular/router';
         ])
       ])
     ]),
-    /* trigger('routeAnimations', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({
-            transform: 'translateX(-100%)'
-          })
-        ]),
-        query(':leave', animateChild()),
-        group([
-          query(':leave', [
-            animate('.25s ease', style({
-              transform: 'translateX(100%)'
-            }))
-          ]),
-          query(':enter', [
-            animate('.25s ease', style({
-              transform: 'translateX(0%)'
-            }))
-          ]),
-          query('@*', animateChild())
-        ])
-      ])
-    ]) */
   ]
 })
 export class AppComponent {
   isAdmin = false;
   showWelcomeWindow = false;
-  constructor (private authService: AuthService, private contexts: ChildrenOutletContexts) {
+  nickname = '';
+
+  showToolbarLabels = true;
+  constructor (
+    private authService: AuthService, 
+    private contexts: ChildrenOutletContexts, 
+    private breakpointObserver: BreakpointObserver
+  ) {
     authService.auth.authState.subscribe(user => {
-      if (user)
+      if (user) {
         authService.isCurrentUserAdmin.then(value => this.isAdmin = value);
-      else 
+        authService.getUser(user.email!).then(userData => {
+          if (userData) this.nickname = userData.nickname;
+        })
+      }
+      else {
         this.isAdmin = false;
+        this.nickname = '';
+      }
     });
     const savedSWW = localStorage.getItem('nonmeron-welcomemsg-shown');
     if (!savedSWW) this.showWelcomeWindow = true;
+
+    // For toolbar labels
+    breakpointObserver.observe('(max-width: 720px)').subscribe(bpState => 
+      this.showToolbarLabels = !bpState.matches
+    );
   }
 
   confirmWelcomeWindow() {

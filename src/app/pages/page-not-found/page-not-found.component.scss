@@ -1,3 +1,7 @@
 :host {
     text-align: center;
 }
+
+main > div {
+    max-width: 800px !important;
+}

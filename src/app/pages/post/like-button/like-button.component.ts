@@ -68,6 +68,5 @@ export class LikeButtonComponent {
       if (!this.likedByCurrentUser)
         this.analytics.logEvent('new-like');
     });
-    this.isLoading = true;
   }
 }

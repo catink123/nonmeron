@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PostComponent } from './pages/post/post.component';
 import { AboutComponent } from './pages/about/about.component';
-import { PostCardComponent } from './post-card/post-card.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 import { environment } from '../environments/environment';
 import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireModule } from '@angular/fire/compat';

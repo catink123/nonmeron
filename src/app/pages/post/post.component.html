@@ -1,25 +1,72 @@
-<p *ngIf="loading">Загрузка...</p>
+<ng-container *ngIf="loading">
+    <main>
+        <div class="postContainer mainShape">
+            <div class="imageContainer">
+                <div class="ghostImage"></div>
+            </div>
+        </div>
+        <div class="commentsContainer mainShape"></div>
+    </main>
+</ng-container>
 <ng-container *ngIf="!loading">
-    <div class="imageContainer">
-        <img [src]="imageURL" *ngIf="!imageLoading">
-        <p *ngIf="imageLoading">Картинка загружается...</p>
-    </div>
-    <a class="dark" [href]="imageURL" target="_blank">Открыть оригинал</a>
-    <p>
-        <app-like-button></app-like-button>
-    </p>
-    <h2 class="title">{{ title }}</h2>
-    <p class="body">{{ body }}</p>
-    <div class="tags">
-        <p>Теги:</p>
-        <a class="dark" *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
-    </div>
-    <p class="timestamp">Пост от {{ timestamp | date : 'medium' }}</p>
-    <div class="comments">
-        <h2 class="title">Комментарии ({{ comments.length }})</h2>
-        <app-comment-box></app-comment-box>
-        <p *ngIf="commentsLoading">Загрузка...</p>
-        <app-comment *ngFor="let entry of comments" [comment]="entry.comment" [author]="entry.isAuthor"
-            [commentID]="entry.id"></app-comment>
-    </div>
+    <main>
+
+        <!-- <div class="imageContainer">
+            <img [src]="imageURL" *ngIf="!imageLoading">
+            <p *ngIf="imageLoading">Картинка загружается...</p>
+        </div>
+        <a class="dark" [href]="imageURL" target="_blank">Открыть оригинал</a>
+        <p>
+            <app-like-button></app-like-button>
+        </p>
+        <h2 class="title">{{ title }}</h2>
+        <p class="body">{{ body }}</p>
+        <div class="tags">
+            <p>Теги:</p>
+            <a class="dark" *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</a>
+        </div>
+        <p class="timestamp">Пост от {{ timestamp | date : 'medium' }}</p>
+        <div class="comments">
+            <h2 class="title">Комментарии ({{ comments.length }})</h2>
+            <app-comment-box></app-comment-box>
+            <p *ngIf="commentsLoading">Загрузка...</p>
+            <app-comment *ngFor="let entry of comments" [comment]="entry.comment" [author]="entry.isAuthor"
+                [commentID]="entry.id"></app-comment>
+        </div> -->
+
+        <div class="postContainer mainShape">
+            <div class="imageContainer">
+                <div class="image" *ngIf="!imageLoading"><img [src]="imageURL" alt="picture"></div>
+                <div class="ghostImage" *ngIf="imageLoading">
+                    Загрузка...
+                </div>
+                <div class="postControls">
+                    <button id="prev" [disabled]="!prevPostID" (click)="prevPost()"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <button id="next" [disabled]="!nextPostID" (click)="nextPost()"><span class="material-symbols-outlined">chevron_right</span></button>
+                </div>
+            </div>
+
+
+            <app-like-button></app-like-button>
+
+            <h1 class="title">{{ title }}</h1>
+            <p>{{ body }}</p>
+            <p class="timestamp">Пост от {{ timestamp | date : 'medium' }}</p>
+
+            <h2>Теги</h2>
+            <div class="tags">
+                <button *ngFor="let tag of tags" routerLink="/search" [queryParams]="{tag}">{{ tag }}</button>
+            </div>
+        </div>
+
+        <div class="commentsContainer mainShape">
+            <h1>Комментарии</h1>
+            <app-comment-box></app-comment-box>
+            <ng-container *ngIf="comments.length === 0">
+                <p class="noComments">Комментариев нет, но вы можете добавить свой!</p>
+            </ng-container>
+            <app-comment *ngFor="let entry of comments" [comment]="entry.comment" [author]="entry.isAuthor"
+                [commentID]="entry.id"></app-comment>
+        </div>
+    </main>
 </ng-container>

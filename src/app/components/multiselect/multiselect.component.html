@@ -1,7 +1,12 @@
-<button id="dropdownButton" [ngClass]="dropdownShown ? 'active' : ''" (click)="dropdownShown = !dropdownShown"><ng-content></ng-content></button>
+<!-- <button id="dropdownButton" [ngClass]="dropdownShown ? 'active' : ''" (click)="dropdownShown = !dropdownShown"><ng-content></ng-content></button>
 <div *ngIf="dropdownShown" class="dropdown" id="dropdown">
     <label *ngFor="let value of entries">
         <input type="checkbox" (click)="select(value.value, $event)" [checked]="value.checked">
         {{value.label}}
     </label>
-</div>
+</div> -->
+
+<label *ngFor="let value of entries">
+    <input type="checkbox" (click)="select(value.value, $event)" [checked]="value.checked">
+    {{value.label}}
+</label>

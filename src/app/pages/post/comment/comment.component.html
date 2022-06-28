@@ -1,9 +1,12 @@
 <div class="comment" [ngClass]="author ? 'authoringPresent' : ''">
-    <p class="author">{{ comment?.nickname }}</p>
+    <p class="author">
+        <span class="material-symbols-outlined filled">person</span>
+        {{ comment?.nickname }}
+    </p>
     <p class="text">{{ comment?.text }}</p>
-    <p class="time">{{ comment?.timestamp | date : 'medium' }}</p>
+    <p class="timestamp">{{ comment?.timestamp | date : 'medium' }}</p>
 </div>
-<div class="authoring" *ngIf="author">
+<div class="authoring" *ngIf="author && !isEditing">
     <button (click)="toggleEditing(true)">Изменить</button>
     <button (click)="delete()">Удалить</button>
 </div>
@@ -11,7 +14,7 @@
     <h3>Изменить комментарий</h3>
     <textarea [formControl]="editedComment" maxlength="500"></textarea>
     <div class="authoring">
-        <button (click)="edit()" [disabled]="!editedComment.valid">Отправить</button>
+        <button class="colored" (click)="edit()" [disabled]="!editedComment.valid">Отправить</button>
         <button (click)="toggleEditing(false)">Отмена</button>
     </div>
 </div>

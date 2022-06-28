@@ -1,4 +1,4 @@
-<div class="mainContainer">
+<!-- <div class="mainContainer">
   <header>
     <h1 class="logo">Non&Meron</h1>
   </header>
@@ -43,4 +43,56 @@
       Закрыть
     </button>
   </div>
+</div> -->
+
+<header>
+  <div class="logo">Non&Meron</div>
+  <div class="menu">
+    <a routerLink="">
+      <span class="material-symbols-outlined ms-filled">home</span>
+      <span *ngIf="showToolbarLabels">Главная</span>
+    </a>
+    <a routerLink="search">
+      <span class="material-symbols-outlined ms-filled">search</span>
+      <span *ngIf="showToolbarLabels">Поиск</span>
+    </a>
+    <a routerLink="admin" *ngIf="isAdmin">
+      <span class="material-symbols-outlined ms-filled">file_upload</span>
+      <span *ngIf="showToolbarLabels">Загрузить</span>
+    </a>
+    <a routerLink="account">
+      <span class="material-symbols-outlined ms-filled">account_circle</span>
+      <span *ngIf="nickname.length > 0">{{ nickname }}</span>
+      <span *ngIf="nickname.length === 0">Аккаунт</span>
+    </a>
+  </div>
+</header>
+
+<div id="routerContainer">
+  <router-outlet></router-outlet>
 </div>
+
+<footer>
+  <div class="logo">Non&Meron</div>
+  <div class="text">
+    <p>
+      Developed by Catink123 <br>
+      Designers: Nonoi the Maid, Catink123
+    </p>
+    <p>Inspired by Modrinth.</p>
+  </div>
+  <div class="contacts">
+    <h2>Contacts:</h2>
+    <br>
+    <p>
+      Catink123 - @catink123 on any social media platform; qwerty.qaz120@gmail.com
+    </p>
+    <br>
+    <p>
+      Nonoi the Maid - @nonoi_the_maid, @sdohnu_v_mukah
+    </p>
+  </div>
+  <p class="center copyright">
+    2022 Merona & Nonoi. Копирайта нет, но вы держитесь.
+  </p>
+</footer>

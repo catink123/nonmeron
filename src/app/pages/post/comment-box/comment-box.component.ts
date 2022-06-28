@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -12,12 +13,14 @@ import { PostService } from 'src/app/post.service';
 })
 export class CommentBoxComponent {
   isLoggedIn = false;
-  comment = new FormControl({value: '', disabled: false}, [Validators.required, Validators.maxLength(500)]);
+  comment = new FormControl({ value: '', disabled: false }, [Validators.required, Validators.maxLength(500)]);
   nickname = '...';
 
+  showCommentBox = false;
+
   constructor(
-    private authService: AuthService, 
-    private postService: PostService, 
+    private authService: AuthService,
+    private postService: PostService,
     private route: ActivatedRoute,
     private analytics: AngularFireAnalytics
   ) {
@@ -41,6 +44,7 @@ export class CommentBoxComponent {
     this.postService.postComment(postID, this.comment.value).then(() => {
       this.analytics.logEvent('new-comment');
       this.comment.patchValue('');
+      this.showCommentBox = false;
     });
   }
 }

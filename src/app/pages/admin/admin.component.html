@@ -1,51 +1,35 @@
-<h1>Добавить новый пост</h1>
-<form [formGroup]="addPostForm" (submit)="submit()">
-    <table>
-        <tr>
-            <td>
-                <span>ID: </span>
-            </td>
-            <td><input type="text" formControlName="id"></td>
-        </tr>
-        <tr>
-            <td>
-                <span>Название: </span>
-            </td>
-            <td><input type="text" formControlName="title"></td>
-            <td><span>(необязательно)</span></td>
-        </tr>
-        <tr>
-            <td>
-                <span>Описание: </span>
-            </td>
-            <td><input type="text" formControlName="description"></td>
-            <td><span>(необязательно)</span></td>
-        </tr>
-        <tr>
-            <td><span>Картинка: </span></td>
-            <td><input type="file" (change)="onFileChange($event)"></td>
-        </tr>
-        <tr>
-            <td>
-                <span>Теги: </span>
-            </td>
-            <td><input type="text" formControlName="tags"></td>
-            <td><span>(отделять через запятую)</span></td>
-        </tr>
-    </table>
-    <button type="submit" [disabled]="!addPostForm.valid">Отправить пост</button>
-</form>
-
-<ng-container *ngIf="isUploading">
-    <p class="info">Идёт загрузка изображений... Не покидайте эту страницу во время загрузки!</p>
-    <p>Полное изображение: 
-        <span *ngIf="fullImageProgress < 1">{{ fullImageProgress | percent }}</span>
-        <span *ngIf="fullImageProgress === 1">Готово</span>
-    </p>
-    <p>Миниатюрное изображение: 
-        <span *ngIf="thumbnailImageProgress < 1">{{ thumbnailImageProgress | percent }}</span>
-        <span *ngIf="thumbnailImageProgress === 1">Готово</span>
-    </p>
-</ng-container>
-<p class="info" *ngIf="hasPosted">Пост успешно отправлен.</p>
-<p class="error" *ngIf="error.length > 0">{{ error }}</p>
+<main class="windowContainer">
+    <div>
+        <h1>Создать новый пост</h1>
+        <form [formGroup]="addPostForm" (submit)="submit()">
+            <div class="inputGrid">
+                <p>ID: </p>
+                <input type="text" formControlName="id" placeholder="verycoolphoto">
+                <p>Название: </p>
+                <input type="text" formControlName="title" placeholder="(необязательно) Cool Photo">
+                <p>Описание: </p>
+                <input type="text" formControlName="description" placeholder="(необязательно) A very great photo.">
+                <p>Картинка: </p>
+                <input type="file" (change)="onFileChange($event)">
+                <p>Теги: </p>
+                <input type="text" formControlName="tags" placeholder="cool, photo, verycool">
+            </div>
+            <p class="info">Теги отделять через запятую.</p>
+            <button class="colored" type="submit" [disabled]="!addPostForm.valid">Создать</button>
+        </form>
+        
+        <ng-container *ngIf="isUploading">
+            <p class="info" style="margin-top: 10px;">Идёт загрузка изображений... Не покидайте эту страницу во время загрузки!</p>
+            <p>Полное изображение:
+                <span *ngIf="fullImageProgress < 1">{{ fullImageProgress | percent }}</span>
+                <span *ngIf="fullImageProgress === 1">Готово</span>
+            </p>
+            <p>Миниатюрное изображение:
+                <span *ngIf="thumbnailImageProgress < 1">{{ thumbnailImageProgress | percent }}</span>
+                <span *ngIf="thumbnailImageProgress === 1">Готово</span>
+            </p>
+        </ng-container>
+        <p class="info" *ngIf="hasPosted">Пост успешно отправлен.</p>
+        <p class="error" *ngIf="error.length > 0">{{ error }}</p>
+    </div>
+</main>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, CollectionReference, DocumentData, QueryDocumentSnapshot } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, CollectionReference, DocumentData, QueryDocumentSnapshot, sortedChanges } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { Timestamp } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -38,7 +38,11 @@ export class PostService {
     private storage: AngularFireStorage
   ) {
     this.postsCollection = afs.collection<Post>('posts');
-    this.posts = this.postsCollection.valueChanges();
+    this.posts = this.postsCollection.valueChanges().pipe(map(posts => 
+      posts.sort((a, b) =>
+        a.timestamp.toDate().getTime() > b.timestamp.toDate().getTime() ? -1 : 1
+      )
+    ));
   }
 
   getPosts() { return this.posts }
@@ -141,5 +145,13 @@ export class PostService {
     const snapshot = await this.postsCollection.ref.where('id', '==', postID).get();
     if (snapshot.empty || !snapshot.docs[0].exists) throw 'invalid-post';
     return this.storage.ref(postID);
+  }
+
+  async getRelativePost(postID: string, indexShift: number) {
+    const postsSnapshot = await firstValueFrom(this.posts);
+    const index = postsSnapshot.findIndex(post => post.id === postID);
+    const newIndex = index + indexShift;
+    if (newIndex > postsSnapshot.length - 1 || newIndex < 0) throw new Error('no-post-at-given-index');
+    return postsSnapshot[newIndex];
   }
 }
