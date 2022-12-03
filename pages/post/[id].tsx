@@ -28,8 +28,8 @@ function PhotoContainer({ imageURL, loading }: PhotoContainerProps) {
       sx={{
         width: '100%',
         height: {
-          md: 450,
-          sm: 350,
+          lg: 545,
+          md: 350,
           xs: 'fit-content'
         },
         display: 'grid',
@@ -53,6 +53,7 @@ export default function Post() {
   const theme = useTheme();
 
   const smallerThanSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const smallerThanMD = useMediaQuery(theme.breakpoints.down('md'));
 
   const router = useRouter();
 
@@ -86,7 +87,7 @@ export default function Post() {
           </Paper>
         </TitleContainer>
         <TitleContainer 
-          titleComponent={<Typography variant="h4" p={2} pb={0}>Comments</Typography>} 
+          titleComponent={<Typography variant={smallerThanMD ? 'h3' : 'h2'} p={2} pb={0} align={smallerThanMD ? 'left' : 'center'}>Comments</Typography>} 
           sx={{
             width: {
               xs: '100%',

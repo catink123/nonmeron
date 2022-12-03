@@ -63,7 +63,7 @@ export default function Stamper() {
       c.drawImage(image, 0, 0);
 
       setIsProcessing(false);
-      setResultImage(canv.toDataURL());
+      setResultImage(canv.toDataURL('image/jpeg', 0.95));
     };
     image.onerror = onError;
     if (savedImage === null) {

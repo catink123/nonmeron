@@ -10,7 +10,7 @@ export default function TitleContainer({ children, titleComponent, collapseTitle
   const theme = useTheme();
 
   return (
-    <Paper sx={{ backgroundColor: alpha(theme.palette.background.paper, 0.75), backdropFilter: 'blur(20px)', boxShadow: 'none' }} {...restProps}>
+    <Paper style={{ backgroundColor: alpha(theme.palette.background.paper, 0.75), backdropFilter: 'blur(20px)', boxShadow: 'none' }} {...restProps}>
       <Collapse in={!collapseTitle}>
         {titleComponent}
       </Collapse>
