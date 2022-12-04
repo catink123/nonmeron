@@ -1,16 +1,24 @@
 import { Box, Card, CardActionArea, CardMedia, Skeleton } from "@mui/material";
+import { Timestamp } from "firebase/firestore";
+import { ref } from "firebase/storage";
 import { useRouter } from "next/router";
+import { useStorage, useStorageDownloadURL } from "reactfire";
+
+export interface Post {
+  id: string;
+  title?: string;
+  description?: string;
+  timestamp: Timestamp;
+  tags: string[];
+}
 
 export interface PostCardProps {
-  postID?: string;
-  title?: string;
-  imageURL?: string;
+  post?: Post;
   loading?: boolean;
 }
 
-export default function PostCard({ postID, title, imageURL, loading }: PostCardProps) {
-  const router = useRouter();
-  if (loading || !imageURL || !postID) return (
+export default function PostCard({ post, loading }: PostCardProps) {
+  const loadingVariant = (
     <Box
       sx={{
         height: 0,
@@ -31,8 +39,18 @@ export default function PostCard({ postID, title, imageURL, loading }: PostCardP
         }}
       />
     </Box>
-  )
-  else return (
+  );
+
+  const router = useRouter();
+
+  if (!post || loading) return loadingVariant;
+
+  const storage = useStorage();
+  const imageRef = ref(storage, post.id + '/thumbnail.jpg');
+  const { status, data: imageURL } = useStorageDownloadURL(imageRef);
+  if (['loading', 'error'].includes(status)) return loadingVariant
+
+  return (
     <Box
       sx={{
         height: 0,
@@ -51,7 +69,7 @@ export default function PostCard({ postID, title, imageURL, loading }: PostCardP
           borderRadius: 0.75
         }}
       >
-        <CardActionArea onClick={() => router.push('/post/' + postID, undefined, {scroll: false})} sx={{height: 'inherit'}}>
+        <CardActionArea onClick={() => router.push('/post/' + post.id, undefined, {scroll: false})} sx={{height: 'inherit'}}>
           <CardMedia component="img" image={imageURL} sx={{objectFit: 'cover', height: '100%'}} />
         </CardActionArea>
       </Card>

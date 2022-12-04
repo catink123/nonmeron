@@ -1,11 +1,23 @@
 import { createTheme } from "@mui/material";
 import '@fontsource/josefin-sans/variable.css';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    reddish: Palette['primary'];
+  }
+  interface PaletteOptions {
+    reddish: PaletteOptions['primary'];
+  }
+}
+
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
       main: '#ce93d8'
+    },
+    reddish: {
+      main: '#f54b38'
     }
   },
   shape: {

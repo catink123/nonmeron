@@ -7,81 +7,79 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Head from "next/head";
 import { darkTheme } from "../src/theme";
 import { pageAnimations } from "../src/pageAnimations";
-import { firestore, storage } from '../src/firebase';
-import { getDocs, collection } from 'firebase/firestore';
-import { getDownloadURL, ref } from "firebase/storage";
-import { useEffect, useState } from "react";
-import { Post, PostsContext } from "../src/PostsContext";
+import { FirebaseAppProvider, FirestoreProvider, StorageProvider, useFirebaseApp } from "reactfire";
+import environment from "../src/environment";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { PropsWithChildren } from "react";
+
+function FirebaseAppWrapper({ children }: PropsWithChildren) {
+  return (
+    <FirebaseAppProvider firebaseConfig={environment.firebaseConfig}>
+      {children}
+    </FirebaseAppProvider>
+  )
+}
+
+function FirestoreWrapper({ children }: PropsWithChildren) {
+  const app = useFirebaseApp();
+  return (
+    <FirestoreProvider sdk={getFirestore(app)}>
+      {children}
+    </FirestoreProvider>
+  )
+}
+
+function StorageWrapper({ children }: PropsWithChildren) {
+  const app = useFirebaseApp();
+  return (
+    <StorageProvider sdk={getStorage(app)}>
+      {children}
+    </StorageProvider>
+  )
+}
+
+function AppWrapper({ children }: PropsWithChildren) {
+  return (
+    <FirebaseAppWrapper>
+      <FirestoreWrapper>
+        <StorageWrapper>
+          <ThemeProvider theme={darkTheme}>
+            {children}
+          </ThemeProvider>
+        </StorageWrapper>
+      </FirestoreWrapper>
+    </FirebaseAppWrapper>
+  )
+}
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  // Load posts from Firestore and their image URLs from Storage upon first load
-  useEffect(() => {
-    getDocs(collection(firestore, "posts")).then(async postsSnapshot => {
-      let postArray: Post[] = await Promise.all(
-        postsSnapshot.docs.map(
-          async doc => {
-            let fullImage = "https://via.placeholder/3000x2000?text=" + doc.id, 
-                thumbnailImage = "https://via.placeholder/300x200?text=" + doc.id;
-            try {
-              fullImage = await getDownloadURL(ref(storage, `${doc.id}/full.jpg`));
-            } catch (error: any) {
-              if (error.code === 'storage/object-not-found') fullImage = "https://via.placeholder/800";
-              else throw error;
-            }
-
-            try {
-              thumbnailImage = await getDownloadURL(ref(storage, `${doc.id}/thumbnail.jpg`));
-            } catch (error: any) {
-              if (error.code === 'storage/object-not-found') thumbnailImage = "https://via.placeholder/800";
-              else throw error;
-            }
-
-            return ({
-              ...doc.data() as Post,
-              imageURL: {
-                full: fullImage,
-                thumbnail: thumbnailImage
-              }
-            });
-          }
-        )
-      );
-      setPosts(postArray.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis()));
-    });
-  }, []);
-
   return (
-    <PostsContext.Provider value={posts}>
-      <ThemeProvider theme={darkTheme}>
-        <Head>
-          <title>Non&Meron</title>
-          <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
-          <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-        </Head>
-        <CssBaseline />
-        <PageLayout>
-          <LazyMotion features={domAnimation}>
-            <AnimatePresence 
-              mode="wait"
-              onExitComplete={() => window.scrollTo(0, 0)}
+    <AppWrapper>
+      <Head>
+        <title>Non&Meron</title>
+      </Head>
+      <CssBaseline />
+      <PageLayout>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence
+            mode="wait"
+            onExitComplete={() => window.scrollTo(0, 0)}
+          >
+            <m.div
+              key={router.route}
+              variants={pageAnimations.variants}
+              transition={pageAnimations.transition}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              style={{ minHeight: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1 }}
             >
-              <m.div
-                key={router.route}
-                variants={pageAnimations.variants}
-                transition={pageAnimations.transition}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                style={{ minHeight: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-              >
-                <Component {...pageProps} />
-              </m.div>
-            </AnimatePresence>
-          </LazyMotion>
-        </PageLayout>
-      </ThemeProvider>
-    </PostsContext.Provider>
+              <Component {...pageProps} />
+            </m.div>
+          </AnimatePresence>
+        </LazyMotion>
+      </PageLayout>
+    </AppWrapper>
   )
 }

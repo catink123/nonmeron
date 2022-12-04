@@ -1,21 +1,21 @@
 import { Paper } from '@mui/material'
 import PostList from '../src/components/PostList';
-import { useContext } from 'react';
-import { PostsContext } from '../src/PostsContext';
+import { useFirestore, useFirestoreCollectionData } from 'reactfire';
+import { collection, CollectionReference, doc } from 'firebase/firestore';
+import { Post } from '../src/components/PostCard';
 
 export default function Home() {
-  const posts = useContext(PostsContext);
+  const firestore = useFirestore();
+  const postsCollection = collection(firestore, 'posts') as CollectionReference<Post>;
+  const {status, data: posts} = useFirestoreCollectionData<Post>(postsCollection);
+
   return (
     <>
       <Paper sx={{ padding: 1 }}>
         <PostList 
-          loading={posts.length === 0} 
+          loading={status === 'loading'} 
           posts={
-            posts.map(post => ({
-              postID: post.id,
-              title: post.title,
-              imageURL: post.imageURL.thumbnail
-            }))
+            status === 'success' ? posts.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis()) : undefined
           } 
         />
       </Paper>
