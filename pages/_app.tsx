@@ -1,17 +1,18 @@
 import "@fontsource/josefin-sans/variable.css";
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import PageLayout from '../src/components/PageLayout'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import PageLayout from '../src/components/PageLayout';
 import { LazyMotion, domAnimation, AnimatePresence, m } from 'framer-motion';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Head from "next/head";
 import { darkTheme } from "../src/theme";
 import { pageAnimations } from "../src/pageAnimations";
-import { FirebaseAppProvider, FirestoreProvider, StorageProvider, useFirebaseApp } from "reactfire";
+import { AuthProvider, FirebaseAppProvider, FirestoreProvider, StorageProvider, useFirebaseApp } from "reactfire";
 import environment from "../src/environment";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { PropsWithChildren } from "react";
+import { getAuth } from "firebase/auth";
 
 function FirebaseAppWrapper({ children }: PropsWithChildren) {
   return (
@@ -21,34 +22,27 @@ function FirebaseAppWrapper({ children }: PropsWithChildren) {
   )
 }
 
-function FirestoreWrapper({ children }: PropsWithChildren) {
+function SdkWrapper({ children }: PropsWithChildren) {
   const app = useFirebaseApp();
   return (
-    <FirestoreProvider sdk={getFirestore(app)}>
-      {children}
-    </FirestoreProvider>
-  )
-}
-
-function StorageWrapper({ children }: PropsWithChildren) {
-  const app = useFirebaseApp();
-  return (
-    <StorageProvider sdk={getStorage(app)}>
-      {children}
-    </StorageProvider>
+    <AuthProvider sdk={getAuth(app)}>
+      <StorageProvider sdk={getStorage(app)}>
+        <FirestoreProvider sdk={getFirestore(app)}>
+          {children}
+        </FirestoreProvider>
+      </StorageProvider>
+    </AuthProvider>
   )
 }
 
 function AppWrapper({ children }: PropsWithChildren) {
   return (
     <FirebaseAppWrapper>
-      <FirestoreWrapper>
-        <StorageWrapper>
-          <ThemeProvider theme={darkTheme}>
-            {children}
-          </ThemeProvider>
-        </StorageWrapper>
-      </FirestoreWrapper>
+      <SdkWrapper>
+        <ThemeProvider theme={darkTheme}>
+          {children}
+        </ThemeProvider>
+      </SdkWrapper>
     </FirebaseAppWrapper>
   )
 }
