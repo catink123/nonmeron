@@ -1,4 +1,5 @@
-import { Paper, Skeleton, Typography, useMediaQuery, useTheme, Stack } from "@mui/material";
+import { Paper, Skeleton, Typography, useMediaQuery, useTheme, Stack, Snackbar, Alert, Button, CircularProgress } from "@mui/material";
+import ButtonLink from "../../src/components/ButtonLink";
 import { doc, DocumentReference } from "firebase/firestore";
 import Head from "next/head";
 import { useRouter } from "next/router"
@@ -8,9 +9,14 @@ import { Post as IPost } from "../../src/components/PostCard";
 import LikeButton from "../../src/components/postParts/LikeButton";
 import PhotoContainer from "../../src/components/postParts/PhotoContainer";
 import TitleContainer from "../../src/components/TitleContainer";
+import dynamic from "next/dynamic";
+
+const CircleProgress = dynamic(() => import('../../src/components/CircleProgress'), {ssr: false});
 
 export default function Post() {
   const [postID, setPostID] = useState<string>();
+  const [isLoginSnackbarOpen, setIsLoginSnackbarOpen] = useState(false);
+  const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
   const theme = useTheme();
 
   const smallerThanSM = useMediaQuery(theme.breakpoints.down('sm'));
@@ -31,19 +37,30 @@ export default function Post() {
   const firestore = useFirestore();
   const postRef = doc(firestore, 'posts/' + postID) as DocumentReference<IPost>;
   const { status, data: postData } = useFirestoreDocData(postRef);
-  console.log(status, JSON.stringify(postData));
 
   return (
     <>
       <Head>
         <title>Post</title>
       </Head>
+      {/* For when the user is not logged in and tries to use the like button on comment. */}
+      <Snackbar anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }} open={isLoginSnackbarOpen}>
+        <Alert severity="info" action={<ButtonLink href="/account/login" color="inherit" size="small" variant="text">Log in</ButtonLink>}>
+          You need to log in to like posts.
+        </Alert>
+      </Snackbar>
+      {/* For when there is an error during like or comment proccessing. */}
+      <Snackbar anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }} open={isErrorSnackbarOpen}>
+        <Alert severity="error">
+          There was an error when proccessing the like state.
+        </Alert>
+      </Snackbar>
       <Stack spacing={1} direction={{ xs: 'column', md: 'row' }}>
         <TitleContainer titleComponent={<Typography variant="h2" p={2} pb={0}>Post - {postID}</Typography>} collapseTitle={smallerThanSM} sx={{ width: '100%' }}>
           <Paper sx={{ p: 1.5 }}>
             <PhotoContainer postID={postID} />
-            <LikeButton postID={postID} />
-            {['loading', 'error'].includes(status) ? (
+            <LikeButton postID={postID} onShowLoginPrompt={() => setIsLoginSnackbarOpen(true)} onLikeError={() => setIsErrorSnackbarOpen(true)} />
+            {['loading', 'error'].includes(status) || postData === undefined ? (
               <>
                 <Skeleton width={200} />
                 <Skeleton width={350} />
@@ -67,7 +84,7 @@ export default function Post() {
             }
           }}
         >
-          <Paper sx={{ p: 1.5, height: '100%' }}>
+          <Paper sx={{ p: 1.5 }}>
             <Typography>Comments</Typography>
           </Paper>
         </TitleContainer>

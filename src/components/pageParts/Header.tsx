@@ -7,7 +7,9 @@ import {
   AccountCircle, 
   AccountCircleOutlined, 
   Construction, 
-  ConstructionOutlined 
+  ConstructionOutlined, 
+  LandscapeOutlined,
+  Landscape
 } from "@mui/icons-material";
 import { alpha, Paper, Slide, Stack, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
@@ -23,6 +25,7 @@ interface HeaderLink {
   iconNormal: ReactElement,
   iconActive: ReactElement,
   label: string,
+  alwaysIcon?: boolean
 }
 interface HeaderLinkLayout {
   left: HeaderLink[],
@@ -35,7 +38,14 @@ const links: HeaderLinkLayout = {
       href: '/',
       iconNormal: <HomeOutlined />,
       iconActive: <Home />,
-      label: 'Home'
+      label: 'Home',
+      alwaysIcon: true
+    },
+    {
+      href: '/posts',
+      iconNormal: <LandscapeOutlined />,
+      iconActive: <Landscape />,
+      label: 'Posts'
     },
     {
       href: '/search',
@@ -91,14 +101,9 @@ export default function Header() {
         component="header"
       >
         <Stack direction="row" spacing={1}>
-          {/* {lessThanSM ? (
-            <IconLogo />
-          ) : (
-            <FullLogo />
-          )} */}
           <FullLogo collapseText={lessThanSM} />
           {links.left.map((link, i) =>
-            lessThanSM || (i >= 1 && lessThanMD) ? (
+            lessThanSM || (i >= 1 && lessThanMD) || link.alwaysIcon ? (
               <IconButtonLink
                 key={link.href}
                 href={link.href}

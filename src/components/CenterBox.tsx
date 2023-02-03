@@ -1,6 +1,7 @@
 import { Box, BoxProps } from "@mui/system";
+import { PropsWithChildren } from "react";
 
-interface CenterBoxProps extends BoxProps, React.PropsWithChildren { }
+interface CenterBoxProps extends BoxProps, PropsWithChildren { }
 
 export default function CenterBox({ children, ...restProps }: CenterBoxProps) {
   return (

@@ -30,5 +30,17 @@ export const darkTheme = createTheme({
     h4: {fontFamily: 'Josefin SansVariable', fontWeight: 400},
     h5: {fontFamily: 'Josefin SansVariable', fontWeight: 500},
     h6: {fontFamily: 'Josefin SansVariable', fontWeight: 600},
-  }
+  },
+  // components: {
+  //   MuiCircularProgress: {
+  //     defaultProps: {
+  //       disableShrink: true
+  //     },
+  //     styleOverrides: {
+  //       circle: {
+  //         background: 'red'
+  //       }
+  //     }
+  //   }
+  // }
 });

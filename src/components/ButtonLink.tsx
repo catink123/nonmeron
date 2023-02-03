@@ -8,7 +8,7 @@ interface NMLinkProps extends React.ComponentProps<typeof Button>, React.PropsWi
 
 export default function ButtonLink({href, children, ...buttonProps}: NMLinkProps) {
   return (
-    <Link href={href} passHref style={{textDecoration: 'none'}} tabIndex={-1} scroll={false}>
+    <Link href={href} passHref style={{textDecoration: 'none', color: 'inherit'}} tabIndex={-1} scroll={false}>
       <Button variant="outlined" {...buttonProps}>{children}</Button>
     </Link>
   )

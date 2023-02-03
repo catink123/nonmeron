@@ -1,4 +1,4 @@
-import { alpha, Collapse, Paper, PaperProps, useTheme } from "@mui/material";
+import { alpha, Box, Collapse, Paper, PaperProps, useTheme } from "@mui/material";
 import { ReactElement } from "react";
 
 export interface TitleContainerProps extends React.PropsWithChildren, PaperProps {
@@ -10,11 +10,13 @@ export default function TitleContainer({ children, titleComponent, collapseTitle
   const theme = useTheme();
 
   return (
-    <Paper style={{ backgroundColor: alpha(theme.palette.background.paper, 0.75), backdropFilter: 'blur(20px)', boxShadow: 'none' }} {...restProps}>
+    <Paper style={{ backgroundColor: alpha(theme.palette.background.paper, 0.75), backdropFilter: 'blur(20px)', boxShadow: 'none', display: 'flex', flexDirection: 'column' }} {...restProps}>
       <Collapse in={!collapseTitle}>
         {titleComponent}
       </Collapse>
-      {children}
+      <Box sx={{flex: '1 1', display: 'grid'}}>
+        {children}
+      </Box>
     </Paper>
   )
 }

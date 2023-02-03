@@ -1,6 +1,8 @@
 import { Box, Paper, Skeleton, SxProps, Theme, useTheme } from "@mui/material";
 import { ref } from "firebase/storage";
+import { useEffect, useRef, useState } from "react";
 import { useStorage, useStorageDownloadURL } from "reactfire";
+import CircleProgress from "../CircleProgress";
 
 const innerStyles: SxProps<Theme> = {
   width: {
@@ -12,7 +14,10 @@ const innerStyles: SxProps<Theme> = {
     xs: 'auto'
   },
   aspectRatio: '3 / 2',
-  overflow: 'hidden'
+  overflow: 'hidden',
+  position: 'relative',
+  display: 'grid',
+  placeItems: 'center'
 }
 interface PostImageProps {
   postID: string
@@ -22,9 +27,34 @@ function PostImage({ postID }: PostImageProps) {
   const storage = useStorage();
   const imageRef = ref(storage, postID + '/full.jpg');
   const { status, data: imageURL } = useStorageDownloadURL(imageRef);
+  const [imageBlobURL, setImageBlobURL] = useState<string>();
+  const [loadedValue, setLoadedValue] = useState<number>();
+
+  const xhrRef = useRef(new XMLHttpRequest());
+  xhrRef.current.onload = () => {
+    setImageBlobURL(URL.createObjectURL(xhrRef.current.response));
+    setLoadedValue(100);
+  };
+  xhrRef.current.onprogress = e => {
+    console.log(e.loaded, e.total)
+    setLoadedValue(e.lengthComputable ? e.loaded / e.total * 100 : undefined);
+  };
+  useEffect(() => {
+    if (status === 'success' && xhrRef.current.readyState === xhrRef.current.OPENED) {
+      xhrRef.current.open('GET', imageURL);
+      xhrRef.current.send();
+      setLoadedValue(0);
+    }
+  }, [status, xhrRef.current.readyState]);
+
   if (status === 'success') return (
     <Paper sx={innerStyles}>
-      <Box component="img" src={imageURL} sx={{width: '100%', height: '100%', objectFit: 'contain', background: theme.palette.background.default}} />
+      {imageBlobURL !== undefined ? (
+        <Box component="img" src={imageBlobURL} sx={{width: '100%', height: '100%', objectFit: 'contain', background: theme.palette.background.default}} />
+      ) : (
+        <Skeleton sx={innerStyles} variant="rounded" animation={false} />
+      )}
+      <CircleProgress sx={{position: 'absolute'}} value={loadedValue} />
     </Paper>
   ) 
   else return (

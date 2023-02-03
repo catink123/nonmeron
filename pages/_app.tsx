@@ -13,6 +13,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { PropsWithChildren } from "react";
 import { getAuth } from "firebase/auth";
+import { auth, firestore, storage } from "../src/firebase";
 
 function FirebaseAppWrapper({ children }: PropsWithChildren) {
   return (
@@ -23,11 +24,10 @@ function FirebaseAppWrapper({ children }: PropsWithChildren) {
 }
 
 function SdkWrapper({ children }: PropsWithChildren) {
-  const app = useFirebaseApp();
   return (
-    <AuthProvider sdk={getAuth(app)}>
-      <StorageProvider sdk={getStorage(app)}>
-        <FirestoreProvider sdk={getFirestore(app)}>
+    <AuthProvider sdk={auth}>
+      <StorageProvider sdk={storage}>
+        <FirestoreProvider sdk={firestore}>
           {children}
         </FirestoreProvider>
       </StorageProvider>
